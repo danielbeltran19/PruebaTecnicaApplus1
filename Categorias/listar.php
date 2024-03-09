@@ -58,10 +58,15 @@
                             <?php echo $nombre; ?>
                         </td>
                         <td>
-                            <a href="" class="btn btn-primary" id="" title="Editar"><i class="fa fa-edit">Editar</i></a>
+                            <a href="editar.php?id=<?php echo $id; ?>" class="btn btn-primary" id="<?php echo $id; ?>"
+                                title="Editar">
+                                <i class="fa fa-edit"></i> Editar
+                            </a>
+
                         </td>
                         <td>
-                            <a onclick="return Confirmation()" class="btn btn-danger" href="eliminar.php?id=<?php echo $id; ?>" title="Eliminar"><i
+                            <a onclick="return Confirmation()" class="btn btn-danger"
+                                href="eliminar.php?id=<?php echo $id; ?>" title="Eliminar"><i
                                     class="fa fa-trash">Eliminar</i></a>
                         </td>
                     </tr>

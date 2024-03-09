@@ -51,7 +51,7 @@
 		}	
 		
 		public function single_record($id){
-			$sql = "SELECT * FROM titular where id='$id'";
+			$sql = "SELECT * FROM category where id='$id'";
 			$res = mysqli_query($this->con, $sql);
 			$return = mysqli_fetch_object($res);
 			return $return ;
@@ -64,15 +64,15 @@
 			return $return ;
 		}
 		
-		public function update($id, $nombres, $apellidos, $telefono, $vereda, $fecha_af, $cuota, $fecha_nac, $id_paquete, $id_contrato){
-			$sql = "UPDATE titular SET nombres='$nombres', apellidos='$apellidos', telefono='$telefono', vereda='$vereda', fecha_af='$fecha_af', cuota='$cuota', fecha_nac='$fecha_nac', id_paquete='$id_paquete', id_contrato='$id_contrato' WHERE id=$id";
-			$res = mysqli_query($this->con, $sql);
-			if($res){
-				return true;
-			}else{
-				return false;
-			}
-		}
+        public function updateCategory($id, $nombre){
+            $sql = "UPDATE category SET nombre='$nombre' WHERE id=$id";
+            $res = mysqli_query($this->con, $sql);
+            if($res){
+                return true;
+            } else {
+                return false;
+            }
+        }        
         public function update2($id_titular,$doc ,$nombres, $apellidos, $fecha_na, $fecha_af, $par, $ods){
 			$sql = "UPDATE beneficiario SET id_titular='$id_titular', nombres='$nombres', apellidos='$apellidos', fecha_na='$fecha_na', fecha_af='$fecha_af', par='$par', ods='$ods' WHERE doc=$doc";
 			$res = mysqli_query($this->con, $sql);
