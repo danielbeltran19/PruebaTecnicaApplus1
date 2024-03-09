@@ -24,16 +24,19 @@
     </div>
     <div class="container mt-5">
         <h2 class="text-center">Sistema Registro de productos.</h2>
-        <h3>Agregar categoria</h3>
+        <h3>Agregar Nuevo Producto</h3>
         <a href="../index.php" class="btn btn-info">Volver</a>
     </div>
     <div class="container">
         <?php
         include("../Database/conexion.php");
-        $categoria = new Database();
+        $producto = new Database();
         if (isset($_POST) && !empty($_POST)) {
-            $nombre = $categoria->sanitize($_POST['nombre']);
-            $res = $categoria->createCategory($nombre);
+            $codig = $producto->sanitize($_POST['codig']);
+            $nombre = $producto->sanitize($_POST['nombre']);
+            $price = $producto->sanitize($_POST['price']);
+            $category_id = $producto->sanitize($_POST['category_id']);
+            $res = $producto->createProduct($codig, $nombre, $price, $category_id);
             if ($res) {
                 $message = '<script type="text/javascript">
                         alert("Datos insertados con exito");
@@ -43,7 +46,7 @@
             } else {
                 $message = '<script type="text/javascript">
                         alert("No se pudieron insertar los Datos");
-                        window.location.href="../Categorias/agregar.php";
+                        window.location.href="../Productos/agregar.php";
                         </script>';
                 $class = "alert alert-danger";
             }
@@ -53,21 +56,51 @@
                 <?php echo $message; ?>
             </div>
             <?php
+
+
         }
         ?>
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-8">
-                    <h3 class="group1" align="center">Registro de categoria</h3>
+                    <h3 class="group1" align="center"></h3>
                     <form method="post" action="" role="form">
                         <div class="form-row col-md ">
                             <div class="form-group col-md-12">
-                                <label for="name"></label>
-                                <input type="text" name="nombre" id="nombre"
-                                    class="form-control unput-sm text-center"
-                                    placeholder="Ingrese el nombre de la categoria" required autocomplete="off">
+                                <label for="Codigo"></label>
+                                <input type="text" name="codig" id="codig" class="form-control unput-sm text-center"
+                                    placeholder="Ingrese el nombre el codigo del producto" required autocomplete="off">
                             </div>
                         </div>
+                        <div class="form-row col-md ">
+                            <div class="form-group col-md-12">
+                                <label for="name"></label>
+                                <input type="text" name="nombre" id="nombre" class="form-control unput-sm text-center"
+                                    placeholder="Ingrese el nombre del producto" required autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-row col-md ">
+                            <div class="form-group col-md-12">
+                                <label for="name"></label>
+                                <input type="number" name="price" id="price" class="form-control unput-sm text-center"
+                                    placeholder="Ingrese el precio del producto" required autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-row col-md">
+                            <label></label>
+                            <select name="category_id" id="category_id" class="form-control input-sm">
+                                <option value="0">Seleccione una categoria</option>
+                                <?php
+                                $datos_categoria = $producto->ReadCategoryProduct();
+                                while ($valores = mysqli_fetch_array($datos_categoria)) {
+                                    $id = $valores['id'];
+                                    $nombre = $valores['nombre'];
+                                    echo '<option value="' . $id . '">' . $nombre . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+
                         <label for="name"></label>
                         <div class="row justify-content-md-center">
                             <div class="col-xs-2 col-sm-2 col-md-2">

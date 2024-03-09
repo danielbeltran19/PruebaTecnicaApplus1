@@ -35,7 +35,7 @@
         // Verificar si el ID está definido y no está vacío
         if (isset($_GET['id']) && !empty($_GET['id'])) {
             $id = intval($_GET['id']);
-            $datos_categoria = $categoria->single_record($id);
+            $datos_categoria = $categoria->single_recordCategory($id);
 
             // Verificar si $datos_categoria contiene un objeto válido
             if ($datos_categoria && is_object($datos_categoria)) {
@@ -78,7 +78,7 @@
                                         <label for="inputPassword4">Nombre:</label>
                                         <input type="text" name="nombre" id="nombre" class="form-control unput-sm text-center"
                                             placeholder="Ingrese la descripcion" value="<?php echo $datos_categoria->nombre; ?>"
-                                            required>
+                                            required autocomplete="off">
                                     </div>
                                 </div>
                                 <div>

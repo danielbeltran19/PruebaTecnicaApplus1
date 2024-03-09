@@ -29,8 +29,8 @@
 				return false;
 			}
 		}
-        public function create1($id_titular, $doc, $nombres, $apellidos, $fecha_na, $fecha_af, $par, $ods){
-			$sql = "INSERT INTO `beneficiario` (id_titular, doc, nombres, apellidos, fecha_na, fecha_af, par, ods) VALUES ('$id_titular', '$doc', '$nombres', '$apellidos', '$fecha_na', '$fecha_af', '$par', '$ods')";
+        public function createProduct($codig, $nombre, $price, $category_id){
+			$sql = "INSERT INTO `product` (codig, nombre, price, category_id) VALUES ('$codig', '$nombre', '$price', '$category_id')";
 			$res1 = mysqli_query($this->con, $sql);
 			if($res1){
 				return true;
@@ -44,21 +44,25 @@
 			$res = mysqli_query($this->con, $sql);
 			return $res;
 		}
-        public function read2(){
-			$sql = "SELECT * FROM beneficiario";
+        public function readProduct(){
+			$sql = "SELECT * FROM product";
 			$res = mysqli_query($this->con, $sql);
 			return $res;
-		}	
-		
-		public function single_record($id){
+		}
+		public function ReadCategoryProduct(){
+			$sql = "SELECT id, nombre FROM category";
+			$res = mysqli_query($this->con, $sql);
+			return $res;
+		}
+		public function single_recordCategory($id){
 			$sql = "SELECT * FROM category where id='$id'";
 			$res = mysqli_query($this->con, $sql);
 			$return = mysqli_fetch_object($res);
 			return $return ;
 		}
         
-        public function single_record1($doc){
-			$sql = "SELECT * FROM beneficiario where doc='$doc'";
+        public function single_recordProductos($id){
+			$sql = "SELECT * FROM product where id='$id'";
 			$res = mysqli_query($this->con, $sql);
 			$return = mysqli_fetch_object($res);
 			return $return ;
@@ -73,8 +77,8 @@
                 return false;
             }
         }        
-        public function update2($id_titular,$doc ,$nombres, $apellidos, $fecha_na, $fecha_af, $par, $ods){
-			$sql = "UPDATE beneficiario SET id_titular='$id_titular', nombres='$nombres', apellidos='$apellidos', fecha_na='$fecha_na', fecha_af='$fecha_af', par='$par', ods='$ods' WHERE doc=$doc";
+        public function updateProduct($id ,$codig ,$nombre, $price, $category_id){
+			$sql = "UPDATE product SET codig='$codig', nombre='$nombre', price='$price', category_id='$category_id' WHERE id=$id";
 			$res = mysqli_query($this->con, $sql);
 			if($res){
 				return true;
@@ -92,8 +96,8 @@
 				return false;
 			}
 		}
-      public function delete2($doc){
-			$sql = "DELETE FROM beneficiario WHERE doc=$doc";
+      public function deleteProduct($id){
+			$sql = "DELETE FROM product WHERE id=$id";
 			$res1 = mysqli_query($this->con, $sql);
 			if($res1){
 				return true;

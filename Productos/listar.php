@@ -13,8 +13,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script type="text/javascript" src="../js/validate.js"></script>
-    <link href="https://cdn.datatables.net/v/bs5/dt-2.0.2/datatables.min.css" rel="stylesheet">
-    <script src="https://cdn.datatables.net/v/bs5/dt-2.0.2/datatables.min.js"></script>
 </head>
 
 <body>
@@ -27,7 +25,7 @@
     </div>
     <div class="container mt-5">
         <h2 class="text-center">Sistema Registro de productos.</h2>
-        <h3>Lista de Categorias</h3>
+        <h3>Lista de Productos</h3>
         <a href="../index.php" class="btn btn-info">Volver</a>
     </div>
     <div class="container">
@@ -35,29 +33,43 @@
             <thead class="thead-dark">
                 <tr class="center">
                     <th scope="col">ID</th>
+                    <th scope="col">Codigo</th>
                     <th scope="col">Nombre</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Categoria</th>
                     <th scope="col" colspan="2">Acciones</th>
                 </tr>
             </thead>
             <?php
             include('../Database/conexion.php');
-            $categoria = new Database();
-            $listado = $categoria->read();
+            $productos = new Database();
+            $listado = $productos->readProduct();
             ?>
             <tbody>
                 <?php
                 while ($row = mysqli_fetch_object($listado)) {
                     $i = 0;
                     $id = $row->id;
+                    $codig = $row->codig;
                     $nombre = $row->nombre;
+                    $price = $row->price;
+                    $category_id = $row->category_id;
                     ?>
-
                     <tr>
                         <td>
                             <?php echo $id; ?>
                         </td>
                         <td>
+                            <?php echo $codig; ?>
+                        </td>
+                        <td>
                             <?php echo $nombre; ?>
+                        </td>
+                        <td>
+                            <?php echo $price; ?>
+                        </td>
+                        <td>
+                            <?php echo $category_id; ?>
                         </td>
                         <td>
                             <a href="editar.php?id=<?php echo $id; ?>" class="btn btn-primary" id="<?php echo $id; ?>"
@@ -82,5 +94,11 @@
 
 </html>
 <script type="text/javascript">
-    $('#table1').DataTable();
+    $(document).ready(function () {
+        $('#table1').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            }
+        });
+    });
 </script>

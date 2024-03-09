@@ -24,8 +24,8 @@
         <a href="Categorias/listar.php" class="btn btn-info">Ver Lista de Categoria</a>
 
         <h3 class="mt-4">Productos</h3>
-        <a href="pedidos/agregar_formulario.php" class="btn btn-primary">Agregar Productos</a>
-        <a href="pedidos/index.php" class="btn btn-info">Ver Lista de Productos</a>
+        <a href="Productos/agregar.php" class="btn btn-primary">Agregar Productos</a>
+        <a href="Productos/listar.php" class="btn btn-info">Ver Lista de Productos</a>
     </div>
 </body>
 
