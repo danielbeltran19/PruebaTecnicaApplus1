@@ -83,7 +83,7 @@
 			}
 		}
        
-		public function delete($id){
+		public function deleteCategorias($id){
 			$sql = "DELETE FROM category WHERE id=$id";
 			$res = mysqli_query($this->con, $sql);
 			if($res){
